@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080808" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/exora-nusantara/exora.github.io/refs/heads/main/icon.png" />
+  <meta name="description" content="PT Exora Nusantara Persada membantu perusahaan menemukan alternatif pemasok untuk kebutuhan material, peralatan, dan perlengkapan industri melalui jaringan relasi di berbagai wilayah Indonesia." />
+  <title>Exora Nusantara Persada</title>
+  <style>
+    :root {
+      --black: #080808;
+      --black-2: #101010;
+      --ink: #111111;
+      --white: #f4f4f1;
+      --paper: #ececea;
+      --silver: #b9bdc0;
+      --silver-2: #858b90;
+      --line-dark: rgba(255,255,255,.16);
+      --line-light: rgba(0,0,0,.16);
+      --muted-light: #a4a6a6;
+      --muted-dark: #666a6d;
+      --page: min(1220px, calc(100% - 64px));
+      --ease: cubic-bezier(.2,.7,.2,1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    ::selection { background: #c7cbce; color: #080808; }
+    .wrap { width: var(--page); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: .19em; text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 22px; height: 1px; background: currentColor; opacity: .7; }
+    .muted { color: var(--muted-light); }
+    .site-header {
+      position: absolute; z-index: 20; inset: 0 0 auto;
+      height: 88px; border-bottom: 1px solid rgba(255,255,255,.11);
+    }
+    .nav-inner { height: 100%; display: flex; justify-content: space-between; align-items: center; }
+    .brand { display: inline-flex; flex-direction: column; gap: 3px; line-height: 1; }
+    .brand-main { font-size: 23px; letter-spacing: .17em; font-weight: 800; }
+    .brand-sub { font-size: 8px; letter-spacing: .31em; color: #aeb2b4; font-weight: 650; }
+    .nav-links { display: flex; align-items: center; gap: 34px; }
+    .nav-links a { color: #c7c9c9; font-size: 11px; letter-spacing: .06em; transition: color .25s ease; }
+    .nav-links a:hover { color: white; }
+    .nav-cta, .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+      border: 1px solid rgba(255,255,255,.54); padding: 13px 18px;
+      color: white; font-size: 10px; letter-spacing: .13em; text-transform: uppercase;
+      background: transparent; transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
+    }
+    .nav-cta:hover, .button:hover { background: white; color: #080808; border-color: white; transform: translateY(-2px); }
+    .arrow { font-size: 16px; line-height: .6; }
+    .menu-toggle { display: none; border: 1px solid var(--line-dark); color: white; background: transparent; width: 42px; height: 42px; }
+
+    /* HERO */
+    .hero {
+      min-height: 790px; height: min(900px, 100svh); max-height: 980px;
+      position: relative; overflow: hidden; isolation: isolate;
+      display: flex; align-items: center;
+      background:
+        radial-gradient(ellipse at 77% 49%, rgba(118,124,129,.17), transparent 34%),
+        radial-gradient(ellipse at 14% 84%, rgba(255,255,255,.045), transparent 29%),
+        #080808;
+    }
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -1; opacity: .18; pointer-events: none;
+      background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 82px 82px; mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+    .hero-content { position: relative; z-index: 3; width: 57%; padding-top: 74px; }
+    .hero h1 { margin: 28px 0 18px; padding: 0 0 .42em; font-size: clamp(56px, 7.5vw, 100px); line-height: 1.2; letter-spacing: -.075em; font-weight: 600; overflow: visible; }
+    .hero h1 span { display: block; padding-bottom: .09em; }
+    .hero h1 .silver-text { margin-bottom: -.09em; }
+    .hero h1 span { display: block; }
+    .hero h1 .silver-text {
+      color: transparent;
+      background: linear-gradient(105deg, #747a7e 2%, #f5f6f5 17%, #8a9094 35%, #fdfdfb 48%, #777e83 67%, #d9dcde 84%, #777d82 100%);
+      -webkit-background-clip: text; background-clip: text;
+      background-size: 220% 100%; animation: sheen 9s ease-in-out infinite alternate;
+    }
+    @keyframes sheen { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+    .hero-copy { display: grid; gap: 9px; max-width: 440px; margin: 0; color: #aeb1b2; }
+    .hero-copy p { margin: 0; }
+    .hero-copy-lead { color: #e0e3e4; font-size: 15px; line-height: 1.45; font-weight: 560; letter-spacing: -.012em; }
+    .hero-copy-detail { color: #aeb1b2; font-size: 13px; line-height: 1.78; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .button-light { background: var(--white); color: var(--black); border-color: var(--white); }
+    .button-light:hover { background: #c7cbce; border-color: #c7cbce; }
+    .button-quiet { border-color: rgba(255,255,255,.2); color: #d0d2d2; }
+    .hero-note { display: flex; align-items: center; gap: 12px; margin-top: 64px; color: #878c8f; font-size: 9px; letter-spacing: .17em; text-transform: uppercase; }
+    .hero-note::before { content: ""; width: 36px; height: 1px; background: #777d80; }
+    .hero-art {
+      position: absolute; z-index: 1; width: min(65vw, 850px); height: min(76vh, 690px);
+      min-height: 430px; right: -5%; top: 49%; transform: translateY(-47%);
+      pointer-events: none; filter: drop-shadow(0 34px 46px rgba(0,0,0,.48));
+    }
+    .liquid-canvas { display: block; width: 100%; height: 100%; }
+    .liquid-fallback {
+      position: absolute; inset: 18% 4%; opacity: .7; filter: blur(1px);
+      background: linear-gradient(170deg, transparent 25%, #eef1f2 34%, #555d62 42%, #f8f9fa 49%, #555d62 58%, #dfe3e5 66%, transparent 75%);
+      border-radius: 48% 52% 42% 58% / 45% 42% 58% 55%; transform: rotate(-11deg);
+      transition: opacity .6s ease;
+    }
+    .hero-art.webgl-ready .liquid-fallback { opacity: 0; }
+    .hero-index { position: absolute; right: 32px; bottom: 34px; color: #777c7f; font-size: 9px; letter-spacing: .16em; writing-mode: vertical-rl; }
+
+    /* INTRO STRIP */
+    .marquee { border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); overflow: hidden; background: #0d0d0d; }
+    .marquee-track { display: flex; width: max-content; gap: 42px; padding: 18px 0; animation: marquee 32s linear infinite; }
+    .marquee-item { display: flex; align-items: center; gap: 42px; white-space: nowrap; color: #a5a9ab; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
+    .marquee-item::after { content: "✳"; color: #d9dcdd; font-size: 12px; }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ABOUT */
+    .section-light { background: var(--paper); color: var(--ink); }
+    .about { padding: 145px 0 152px; }
+    .about-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 12%; align-items: start; }
+    .about-label { color: #62676a; }
+    .section-number { margin-top: 70px; font-size: 11px; letter-spacing: .16em; color: #8a8e90; }
+    .about h2, .section-heading { margin: 0; font-size: clamp(39px, 5.4vw, 72px); line-height: 1.02; letter-spacing: -.065em; font-weight: 560; }
+    .about h2 em { font-style: normal; color: #858b8f; }
+    .about-body { margin-top: 34px; max-width: 570px; color: #62676a; font-size: 14px; line-height: 1.95; }
+    .about-bottom { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-top: 74px; padding-top: 22px; border-top: 1px solid var(--line-light); }
+    .about-bottom p { max-width: 440px; margin: 0; font-size: 11px; line-height: 1.8; color: #777c7e; }
+    .text-link { display: inline-flex; gap: 12px; align-items: center; font-size: 10px; text-transform: uppercase; letter-spacing: .13em; border-bottom: 1px solid #818588; padding-bottom: 8px; white-space: nowrap; }
+
+    /* SERVICES */
+    .services { padding: 132px 0 145px; background: #0b0b0b; }
+    .section-top { display: flex; justify-content: space-between; align-items: end; gap: 40px; margin-bottom: 62px; }
+    .section-top .section-heading { max-width: 700px; margin-top: 23px; }
+    .section-top > p { max-width: 255px; margin: 0 0 6px; color: #9a9fa1; font-size: 12px; line-height: 1.85; }
+    .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line-dark); border-left: 1px solid var(--line-dark); }
+    .service-card { min-height: 300px; padding: 30px 28px; border-right: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); position: relative; transition: background .35s ease; }
+    .service-card:hover { background: #151515; }
+    .service-card .num { color: #858b8e; font-size: 10px; letter-spacing: .13em; }
+    .service-icon { margin: 45px 0 30px; height: 34px; color: #c4c8ca; }
+    .service-icon svg { width: 34px; height: 34px; stroke: currentColor; fill: none; stroke-width: 1.15; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { margin: 0 0 13px; font-size: 19px; font-weight: 520; letter-spacing: -.035em; }
+    .service-card p { max-width: 290px; margin: 0; color: #92989a; font-size: 11px; line-height: 1.85; }
+    .service-card .card-arrow { position: absolute; right: 25px; top: 27px; font-size: 17px; color: #777d80; }
+
+    /* INDUSTRIES */
+    .industries { padding: 135px 0 144px; background: #e8e9e7; color: #101111; }
+    .industries .section-top { margin-bottom: 65px; }
+    .industries .eyebrow { color: #666b6d; }
+    .industries .section-top > p { color: #6e7375; }
+    .industry-list { border-top: 1px solid rgba(0,0,0,.25); }
+    .industry-row { display: grid; grid-template-columns: 90px 1fr 1.1fr 28px; gap: 25px; align-items: center; padding: 26px 4px; border-bottom: 1px solid rgba(0,0,0,.2); transition: padding .3s var(--ease); }
+    .industry-row:hover { padding-left: 14px; padding-right: 14px; }
+    .industry-row .idx { color: #8a8f91; font-size: 10px; letter-spacing: .12em; }
+    .industry-row h3 { margin: 0; font-size: clamp(20px, 2.5vw, 32px); letter-spacing: -.05em; font-weight: 530; }
+    .industry-row p { margin: 0; color: #6f7476; font-size: 11px; line-height: 1.7; }
+    .industry-row .arr { color: #777d80; font-size: 18px; }
+
+    /* PROCESS */
+    .process { padding: 142px 0 150px; background: #101010; }
+    .process-intro { display: grid; grid-template-columns: 1fr .72fr; gap: 12%; align-items: end; margin-bottom: 76px; }
+    .process-intro .section-heading { margin-top: 22px; }
+    .process-intro p { color: #9da1a2; font-size: 12px; line-height: 1.9; margin: 0 0 5px; max-width: 360px; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line-dark); }
+    .process-step { padding: 25px 22px 0 0; margin-right: 22px; position: relative; }
+    .process-step:not(:last-child)::after { content: ""; position: absolute; top: -1px; right: 0; width: 1px; height: 18px; background: #777d80; }
+    .process-step .step-no { color: #8b9194; font-size: 10px; letter-spacing: .13em; }
+    .process-step h3 { margin: 52px 0 13px; font-size: 18px; font-weight: 520; letter-spacing: -.035em; }
+    .process-step p { margin: 0; max-width: 220px; color: #969b9d; font-size: 11px; line-height: 1.85; }
+
+    /* CTA / CONTACT */
+    .contact { padding: 135px 0 130px; background: #d9dcdd; color: #101111; }
+    .contact-grid { display: grid; grid-template-columns: 1fr .75fr; gap: 12%; }
+    .contact h2 { margin: 24px 0 22px; max-width: 650px; font-size: clamp(48px, 7vw, 88px); line-height: .95; letter-spacing: -.075em; font-weight: 570; }
+    .contact-intro { max-width: 410px; color: #63696c; font-size: 13px; line-height: 1.9; }
+    .contact-form { border-top: 1px solid rgba(0,0,0,.3); padding-top: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { margin-bottom: 20px; }
+    .field label { display: block; margin-bottom: 9px; color: #555b5e; font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .field input, .field textarea, .field select { width: 100%; border: 0; border-bottom: 1px solid rgba(0,0,0,.28); border-radius: 0; padding: 11px 0; color: #111; outline: none; background: transparent; font-size: 12px; }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: #111; }
+    .field textarea { min-height: 78px; resize: vertical; }
+    .field select { appearance: none; }
+    .field input::placeholder, .field textarea::placeholder { color: #8b9092; }
+    .submit-row { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin-top: 7px; }
+    .submit-btn { cursor: pointer; border: 1px solid #111; color: white; background: #111; padding: 15px 19px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; transition: all .25s ease; }
+    .submit-btn:hover { color: #111; background: transparent; }
+    .form-note { color: #73797b; font-size: 10px; line-height: 1.6; }
+    .form-status { min-height: 18px; margin-top: 14px; color: #34393b; font-size: 11px; }
+
+    /* FOOTER */
+    footer { background: #080808; color: white; padding: 48px 0 25px; }
+    .footer-top { display: flex; justify-content: space-between; align-items: start; gap: 30px; padding-bottom: 56px; }
+    .footer-tagline { margin-top: 17px; color: #888e91; max-width: 240px; font-size: 10px; line-height: 1.8; }
+    .footer-links { display: flex; gap: 52px; }
+    .footer-col { display: flex; flex-direction: column; gap: 13px; }
+    .footer-col span { margin-bottom: 4px; color: #858b8e; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
+    .footer-col a { color: #c2c5c6; font-size: 10px; transition: color .2s ease; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 18px; border-top: 1px solid var(--line-dark); color: #767c7f; font-size: 9px; letter-spacing: .08em; }
+    .footer-bottom span:last-child { text-transform: uppercase; }
+
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 900px) {
+      :root { --page: min(100% - 44px, 720px); }
+      .hero { min-height: 760px; height: auto; }
+      .hero-content { width: 70%; padding: 170px 0 110px; }
+      .hero-art { width: 78vw; height: 570px; right: -20%; top: 53%; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 52px; }
+      .about { padding: 110px 0; }
+      .about-side { display: flex; justify-content: space-between; align-items: end; }
+      .section-number { margin-top: 0; }
+      .service-card { min-height: 285px; padding: 24px 20px; }
+      .process-intro { grid-template-columns: 1fr .8fr; gap: 7%; }
+      .industry-row { grid-template-columns: 55px 1fr 1fr 20px; gap: 16px; }
+    }
+    @media (min-width: 641px) and (max-width: 760px) {
+      .hero-content { isolation: isolate; }
+      .hero-content::before {
+        content: ""; position: absolute; z-index: -1; pointer-events: none;
+        left: -22px; right: -18px; top: -22px; bottom: -18px; border-radius: 18px;
+        background: linear-gradient(180deg, rgba(8,8,8,.31), rgba(8,8,8,.15) 62%, rgba(8,8,8,.04));
+        -webkit-backdrop-filter: blur(12px) saturate(.84); backdrop-filter: blur(12px) saturate(.84);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.9) 9%, #000 83%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.9) 9%, #000 83%, transparent 100%);
+      }
+    }
+    @media (max-width: 640px) {
+      :root { --page: calc(100% - 40px); }
+      .site-header { height: 72px; }
+      .brand-main { font-size: 20px; }
+      .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+      .nav-links {
+        display: none; position: absolute; top: 71px; left: 0; right: 0; padding: 22px 20px 25px;
+        background: rgba(8,8,8,.97); border-bottom: 1px solid var(--line-dark); flex-direction: column; align-items: stretch; gap: 0;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .nav-links .nav-cta { margin-top: 15px; text-align: center; }
+      .hero { min-height: 760px; }
+      .hero-content { width: 100%; padding: 155px 0 88px; isolation: isolate; }
+      .hero-content::before {
+        content: ""; position: absolute; z-index: -1; pointer-events: none;
+        left: -20px; right: -18px; top: -22px; bottom: -18px; border-radius: 18px;
+        background: linear-gradient(180deg, rgba(8,8,8,.34), rgba(8,8,8,.20) 58%, rgba(8,8,8,.08));
+        -webkit-backdrop-filter: blur(13px) saturate(.82); backdrop-filter: blur(13px) saturate(.82);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.9) 9%, #000 83%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.9) 9%, #000 83%, transparent 100%);
+      }
+      .hero h1 { font-size: clamp(49px, 13.8vw, 74px); line-height: 1.18; margin-top: 27px; margin-bottom: 17px; padding-bottom: .42em; }
+      .hero h1 span { padding-bottom: .10em; }
+      .hero h1 .silver-text { margin-bottom: -.10em; }
+      .hero-copy { max-width: 340px; gap: 8px; }
+      .hero-copy-lead { font-size: 14px; }
+      .hero-copy-detail { font-size: 12px; line-height: 1.75; }
+      .hero-actions { margin-top: 27px; }
+      .hero-art { width: 118vw; height: 470px; min-height: 0; right: -42%; top: 61%; opacity: .86; }
+      .hero-note { margin-top: 45px; font-size: 8px; }
+      .hero-index { right: 14px; bottom: 18px; }
+      .marquee-track { gap: 25px; padding: 15px 0; }
+      .marquee-item { gap: 25px; font-size: 8px; }
+      .about, .services, .industries, .process, .contact { padding: 88px 0; }
+      .about-grid { gap: 37px; }
+      .about h2, .section-heading { font-size: clamp(39px, 11vw, 58px); }
+      .about-body { margin-top: 24px; font-size: 13px; }
+      .about-bottom { margin-top: 48px; align-items: start; flex-direction: column; }
+      .section-top { display: block; margin-bottom: 42px; }
+      .section-top .section-heading { margin-top: 20px; }
+      .section-top > p { margin-top: 22px; }
+      .service-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: 245px; padding: 24px; }
+      .service-icon { margin: 31px 0 23px; }
+      .industry-row { grid-template-columns: 32px 1fr 20px; gap: 12px; padding: 22px 0; }
+      .industry-row p { grid-column: 2 / 3; grid-row: 2; }
+      .industry-row .arr { grid-column: 3; grid-row: 1 / 3; }
+      .industry-row h3 { font-size: 23px; }
+      .process-intro { display: block; margin-bottom: 48px; }
+      .process-intro p { margin-top: 23px; }
+      .process-grid { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+      .process-step { min-height: 180px; margin-right: 16px; }
+      .process-step h3 { margin-top: 35px; }
+      .process-step:nth-child(2)::after { display: none; }
+      .contact h2 { font-size: clamp(50px, 14vw, 76px); }
+      .contact-grid { gap: 48px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .footer-top { flex-direction: column; padding-bottom: 42px; }
+      .footer-links { width: 100%; justify-content: space-between; gap: 20px; }
+      .footer-bottom { flex-direction: column; gap: 9px; }
+    }
+  
+
+    /* V7 FINISHING — restrained motion, minimal paint work */
+    .site-header {
+      position: fixed;
+      background: rgba(8,8,8,0);
+      transition: background .35s ease, border-color .35s ease, backdrop-filter .35s ease;
+      will-change: background;
+    }
+    .site-header.is-scrolled,
+    .site-header.menu-open {
+      background: rgba(8,8,8,.78);
+      border-bottom-color: rgba(255,255,255,.17);
+      -webkit-backdrop-filter: blur(16px) saturate(.82);
+      backdrop-filter: blur(16px) saturate(.82);
+    }
+    .scroll-progress {
+      position: fixed; z-index: 100; inset: 0 auto auto 0;
+      width: 100%; height: 2px; pointer-events: none;
+      background: rgba(255,255,255,.08);
+    }
+    .scroll-progress span {
+      display: block; width: 100%; height: 100%;
+      background: linear-gradient(90deg, #72797e, #f5f6f6 48%, #858c91);
+      transform: scaleX(0); transform-origin: left center;
+      will-change: transform;
+    }
+    .hero { --pointer-x: 72%; --pointer-y: 48%; }
+    .hero::after {
+      content: ""; position: absolute; inset: 0; z-index: 0;
+      pointer-events: none; opacity: .42;
+      background: radial-gradient(ellipse 420px 330px at var(--pointer-x) var(--pointer-y), rgba(190,198,203,.09), transparent 72%);
+      transition: opacity .5s ease;
+    }
+    .hero-content { z-index: 3; }
+    .hero-content > .eyebrow,
+    .hero-content > h1,
+    .hero-content > .hero-copy,
+    .hero-content > .hero-actions,
+    .hero-content > .hero-note {
+      opacity: 0;
+      animation: heroEnter .85s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .hero-content > .eyebrow { animation-delay: .12s; }
+    .hero-content > h1 { animation-delay: .22s; }
+    .hero-content > .hero-copy { animation-delay: .34s; }
+    .hero-content > .hero-actions { animation-delay: .46s; }
+    .hero-content > .hero-note { animation-delay: .58s; }
+    @keyframes heroEnter {
+      from { opacity: 0; transform: translate3d(0, 18px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .nav-links a:not(.nav-cta) { position: relative; }
+    .nav-links a:not(.nav-cta)::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -7px;
+      height: 1px; background: #d9dddf; transform: scaleX(0);
+      transform-origin: right; transition: transform .35s var(--ease);
+    }
+    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); transform-origin: left; }
+    .nav-cta, .button, .submit-btn { position: relative; overflow: hidden; isolation: isolate; }
+    .nav-cta::before, .button::before, .submit-btn::before {
+      content: ""; position: absolute; z-index: -1; inset: -1px auto -1px -55%; width: 38%;
+      background: linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent);
+      transform: skewX(-18deg); transition: left .65s cubic-bezier(.2,.7,.2,1);
+      pointer-events: none;
+    }
+    .nav-cta:hover::before, .button:hover::before, .submit-btn:hover::before { left: 125%; }
+    .button .arrow, .nav-cta .arrow { display: inline-block; transition: transform .3s var(--ease); }
+    .button:hover .arrow, .nav-cta:hover .arrow { transform: translate(3px,-2px); }
+    .button-quiet:hover .arrow { transform: translateY(3px); }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .service-card {
+      overflow: hidden;
+      transform: translateZ(0);
+      transition: background .4s ease, transform .45s var(--ease), box-shadow .45s ease, border-color .4s ease;
+    }
+    .service-card::before {
+      content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(236,240,242,.75), transparent);
+      transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease);
+    }
+    .service-card:hover { transform: translate3d(0,-6px,0); box-shadow: 0 20px 42px rgba(0,0,0,.19); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon svg { transition: transform .45s var(--ease), opacity .35s ease; }
+    .service-card:hover .service-icon svg { transform: translate3d(0,-4px,0) scale(1.06); opacity: 1; }
+    .service-card .card-arrow { transition: transform .35s var(--ease), color .35s ease; }
+    .service-card:hover .card-arrow { transform: translate(3px,-3px); color: #f1f3f4; }
+    .industry-row { position: relative; }
+    .industry-row::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+      background: linear-gradient(90deg, #33393c, #aab0b3, #33393c);
+      transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease);
+    }
+    .industry-row:hover::after { transform: scaleX(1); }
+    .industry-row .idx, .industry-row .arr { transition: transform .35s var(--ease), color .35s ease; }
+    .industry-row:hover .idx { transform: translateX(3px); color: #42484b; }
+    .industry-row:hover .arr { transform: translate(4px,-3px); color: #191c1d; }
+    .process-step { transition: transform .45s var(--ease); }
+    .process-step:hover { transform: translateY(-5px); }
+    .process-step .step-no { display: inline-block; transition: color .35s ease, letter-spacing .35s ease; }
+    .process-step:hover .step-no { color: #e2e5e6; letter-spacing: .18em; }
+    .process-step h3 { transition: color .35s ease, transform .35s var(--ease); }
+    .process-step:hover h3 { color: #fff; transform: translateX(3px); }
+    .text-link { transition: color .3s ease, border-color .3s ease; }
+    .text-link .arrow { display: inline-block; transition: transform .3s var(--ease); }
+    .text-link:hover .arrow { transform: translate(3px,-3px); }
+    .field input, .field textarea, .field select { transition: border-color .3s ease, padding-left .3s ease; }
+    .field input:focus, .field textarea:focus, .field select:focus { padding-left: 8px; }
+    .submit-btn { transition: color .3s ease, background .3s ease, transform .3s var(--ease), box-shadow .3s ease; }
+    .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,.16); }
+    .footer-col a { width: fit-content; position: relative; }
+    .footer-col a::after {
+      content: ""; position: absolute; left: 0; right: 100%; bottom: -4px;
+      height: 1px; background: #bfc4c6; transition: right .3s var(--ease);
+    }
+    .footer-col a:hover::after { right: 0; }
+    .motion-item {
+      opacity: 0; transform: translate3d(0, 24px, 0);
+      transition: opacity .72s var(--ease) var(--motion-delay, 0ms), transform .72s var(--ease) var(--motion-delay, 0ms);
+      will-change: opacity, transform;
+    }
+    .motion-item.is-in { opacity: 1; transform: translate3d(0,0,0); }
+    .service-card.motion-item, .industry-row.motion-item, .process-step.motion-item { will-change: opacity, transform; }
+    .service-card.motion-item.is-in:hover { transform: translate3d(0,-6px,0); }
+    .industry-row.motion-item.is-in:hover { transform: translate3d(0,0,0); }
+    @media (max-width: 640px) {
+      .site-header.is-scrolled, .site-header.menu-open { background: rgba(8,8,8,.9); }
+      .hero::after { opacity: .24; }
+      .service-card:hover, .process-step:hover { transform: none; box-shadow: none; }
+      .industry-row:hover { padding-left: 0; padding-right: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-content > .eyebrow, .hero-content > h1, .hero-content > .hero-copy,
+      .hero-content > .hero-actions, .hero-content > .hero-note { opacity: 1; animation: none; transform: none; }
+      .motion-item { opacity: 1; transform: none; transition: none; }
+      .scroll-progress { display: none; }
+    }
+
+    /* FINAL HERO OVERLAY — landscape and portrait tuning */
+    @media (min-width: 901px) and (orientation: landscape) {
+      .hero-content { isolation: isolate; }
+      .hero-content::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        left: -28px;
+        right: -125px;
+        top: -34px;
+        bottom: -30px;
+        background: linear-gradient(
+          90deg,
+          rgba(8,8,8,.99) 0%,
+          rgba(8,8,8,.99) 78%,
+          rgba(8,8,8,.82) 90%,
+          rgba(8,8,8,0) 100%
+        );
+      }
+    }
+
+    @media (min-width: 641px) and (max-width: 760px) and (orientation: portrait) {
+      .hero-content::before {
+        left: -22px;
+        right: calc(100% + 22px - 100vw);
+        top: -22px;
+        bottom: -18px;
+        border-radius: 0;
+        background: transparent;
+        -webkit-backdrop-filter: blur(14px) saturate(.86);
+        backdrop-filter: blur(14px) saturate(.86);
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+      .hero-index { z-index: 4; }
+    }
+
+    @media (max-width: 640px) and (orientation: portrait) {
+      .hero-content::before {
+        left: -20px;
+        right: calc(100% + 20px - 100vw);
+        top: -22px;
+        bottom: -18px;
+        border-radius: 0;
+        background: transparent;
+        -webkit-backdrop-filter: blur(15px) saturate(.86);
+        backdrop-filter: blur(15px) saturate(.86);
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
+      .hero-index { z-index: 4; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+  <header class="site-header">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Beranda Exora Nusantara Persada">
+        <span class="brand-main">EXORA</span>
+        <span class="brand-sub">NUSANTARA PERSADA</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka navigasi" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#about">Tentang</a>
+        <a href="#services">Layanan</a>
+        <a href="#industries">Bidang Usaha</a>
+        <a href="#process">Alur Kerja</a>
+        <a class="nav-cta" href="#contact">Kirim Inquiry <span class="arrow">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-content">
+          <div class="eyebrow">Your Sourcing Partner</div>
+          <h1><span>Fokus pada</span><span class="silver-text">bisnis Anda.</span></h1>
+          <div class="hero-copy">
+            <p class="hero-copy-lead">Biar kami bantu sourcing-nya.</p>
+            <p class="hero-copy-detail">Kirim inquiry barang yang sulit Anda temukan. Exora akan meneruskannya ke jaringan pemasok dan relasi kami di berbagai wilayah Indonesia untuk mencari alternatif yang sesuai.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-light" href="#contact">Kirim Inquiry <span class="arrow">↗</span></a>
+            <a class="button button-quiet" href="#services">Cara Kami Bekerja <span class="arrow">↓</span></a>
+          </div>
+          <div class="hero-note">Jaringan pemasok · Relasi langsung · Seluruh Indonesia</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="liquid-fallback"></div>
+        <canvas class="liquid-canvas" id="liquidCanvas" aria-hidden="true"></canvas>
+      </div>
+      <div class="hero-index">01 — EXORA / NUSANTARA PERSADA</div>
+    </section>
+
+    <div class="marquee" aria-label="Layanan Exora">
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-item">Jaringan pemasok Indonesia</div><div class="marquee-item">Relasi langsung Exora</div><div class="marquee-item">Alternatif sumber pengadaan</div><div class="marquee-item">Penawaran untuk kebutuhan Anda</div>
+        <div class="marquee-item">Jaringan pemasok Indonesia</div><div class="marquee-item">Relasi langsung Exora</div><div class="marquee-item">Alternatif sumber pengadaan</div><div class="marquee-item">Penawaran untuk kebutuhan Anda</div>
+      </div>
+    </div>
+
+    <section class="about section-light" id="about">
+      <div class="wrap about-grid">
+        <div class="about-side reveal">
+          <div class="eyebrow about-label">01 / Tentang Exora</div>
+          <div class="section-number">Material, peralatan,<br/>dan koordinasi pesanan.</div>
+        </div>
+        <div class="reveal">
+          <h2>Membuka lebih banyak <em>pilihan pemasok.</em></h2>
+          <p class="about-body">PT Exora Nusantara Persada membantu perusahaan memperluas pilihan sumber pengadaan. Kami menghubungkan kebutuhan proyek maupun operasional dengan pemasok yang relevan melalui jaringan dan relasi yang telah kami bangun di berbagai wilayah Indonesia. Saat pemasok yang biasa digunakan belum dapat memenuhi kebutuhan, Exora dapat membantu membuka alternatif lain.</p>
+          <div class="about-bottom">
+            <p>Semakin jelas detail inquiry yang Anda berikan, semakin mudah bagi kami meneruskannya ke jaringan yang tepat dan memeriksa opsi yang tersedia.</p>
+            <a class="text-link" href="#process">Lihat alur kerja <span class="arrow">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="section-top reveal">
+          <div>
+            <div class="eyebrow muted">02 / Layanan</div>
+            <h2 class="section-heading">Dari inquiry<br/><span class="muted">menjadi penawaran.</span></h2>
+          </div>
+          <p>Setiap inquiry kami teruskan ke jaringan pemasok dan relasi Exora untuk mencari opsi yang sesuai dengan kebutuhan Anda.</p>
+        </div>
+        <div class="service-grid reveal">
+          <article class="service-card">
+            <span class="num">01 / INQUIRY DITERIMA</span><span class="card-arrow">↗</span>
+            <div class="service-icon"><svg viewBox="0 0 36 36"><circle cx="15" cy="15" r="9.5"/><path d="m22 22 8 8M11 15h8M15 11v8"/></svg></div>
+            <h3>Inquiry Diterima</h3>
+            <p>Kirim nama barang, spesifikasi, jumlah, dan lokasi pengiriman. Tim Exora akan meninjau detail kebutuhan Anda.</p>
+          </article>
+          <article class="service-card">
+            <span class="num">02 / DISTRIBUSI JARINGAN</span><span class="card-arrow">↗</span>
+            <div class="service-icon"><svg viewBox="0 0 36 36"><path d="M5 9h26v18H5zM5 13l13 9 13-9M12 5h12"/></svg></div>
+            <h3>Inquiry Diteruskan ke Jaringan</h3>
+            <p>Kebutuhan Anda kami teruskan ke jaringan pemasok dan relasi langsung Exora di berbagai wilayah Indonesia, termasuk koneksi yang tidak selalu tersedia secara terbuka.</p>
+          </article>
+          <article class="service-card">
+            <span class="num">03 / PENAWARAN</span><span class="card-arrow">↗</span>
+            <div class="service-icon"><svg viewBox="0 0 36 36"><path d="M4 10h18v16H4zM22 16h6l4 5v5H22zM10 30a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM27 30a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/></svg></div>
+            <h3>Penawaran Dikirim</h3>
+            <p>Opsi pemasok dan penawaran yang tersedia kami rangkum, lalu kami kirimkan langsung kepada Anda untuk ditinjau.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="industries" id="industries">
+      <div class="wrap">
+        <div class="section-top reveal">
+          <div>
+            <div class="eyebrow">03 / Bidang Usaha</div>
+            <h2 class="section-heading">Bidang usaha<br/>yang kami layani.</h2>
+          </div>
+          <p>Kami membantu kebutuhan pengadaan untuk proyek, pemeliharaan, dan kegiatan operasional perusahaan.</p>
+        </div>
+        <div class="industry-list reveal">
+          <div class="industry-row"><span class="idx">01</span><h3>Konstruksi</h3><p>Material, perlengkapan, dan kebutuhan lokasi untuk pekerjaan konstruksi.</p><span class="arr">↗</span></div>
+          <div class="industry-row"><span class="idx">02</span><h3>Pemeliharaan Industri</h3><p>Barang MRO, suku cadang pengganti, dan perlengkapan operasional.</p><span class="arr">↗</span></div>
+          <div class="industry-row"><span class="idx">03</span><h3>Teknik &amp; Fabrikasi</h3><p>Komponen mekanikal dan elektrikal, material fabrikasi, serta suku cadang.</p><span class="arr">↗</span></div>
+          <div class="industry-row"><span class="idx">04</span><h3>Energi</h3><p>Material dan peralatan untuk proyek serta kegiatan operasional sektor energi.</p><span class="arr">↗</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <div class="wrap">
+        <div class="process-intro reveal">
+          <div>
+            <div class="eyebrow muted">04 / Alur Kerja</div>
+            <h2 class="section-heading">Jaringan pemasok<br/><span class="muted">di berbagai wilayah Indonesia.</span></h2>
+          </div>
+          <p>Setelah detail inquiry diterima, kami meneruskannya ke jaringan pemasok dan relasi langsung Exora. Opsi yang masuk akan kami tinjau sebelum penawaran disampaikan kepada Anda.</p>
+        </div>
+        <div class="process-grid reveal">
+          <article class="process-step"><span class="step-no">01 — INQUIRY DITERIMA</span><h3>Kirim detail inquiry</h3><p>Sampaikan nama barang, spesifikasi, jumlah, lokasi pengiriman, dan waktu yang dibutuhkan.</p></article>
+          <article class="process-step"><span class="step-no">02 — DISTRIBUSI JARINGAN</span><h3>Inquiry disebarkan</h3><p>Kami meneruskan kebutuhan Anda ke jaringan pemasok dan relasi langsung Exora di berbagai wilayah Indonesia, termasuk koneksi yang tidak tersedia secara terbuka.</p></article>
+          <article class="process-step"><span class="step-no">03 — OPSI PEMASOK</span><h3>Opsi dikumpulkan</h3><p>Kami meninjau respons pemasok, kesesuaian spesifikasi, ketersediaan barang, harga, dan ketentuan pengiriman.</p></article>
+          <article class="process-step"><span class="step-no">04 — PENAWARAN DIKIRIM</span><h3>Penawaran untuk Anda</h3><p>Opsi pemasok dan penawaran yang relevan kami sampaikan langsung kepada Anda untuk ditinjau.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="reveal">
+          <div class="eyebrow">05 / Hubungi Kami</div>
+          <h2>Kirim kebutuhan pengadaan Anda.</h2>
+          <p class="contact-intro">Isi detail kebutuhan Anda di bawah ini. Setelah menekan tombol, WhatsApp Exora akan terbuka dengan pesan yang sudah disiapkan. Periksa kembali pesannya, lalu tekan kirim.</p>
+        </div>
+        <form class="contact-form reveal" id="rfqForm">
+          <div class="form-row">
+            <div class="field"><label for="name">Nama / Perusahaan</label><input id="name" name="name" placeholder="Nama atau perusahaan Anda" required /></div>
+            <div class="field"><label for="email">Email atau nomor telepon</label><input id="email" name="email" placeholder="Alamat email atau nomor telepon" required /></div>
+          </div>
+          <div class="field"><label for="category">Kategori kebutuhan</label><select id="category" name="category" required><option value="" disabled selected>Pilih kategori</option><option>Material konstruksi</option><option>Perlengkapan industri / MRO</option><option>Mekanikal / Elektrikal</option><option>Teknik / Fabrikasi</option><option>Kebutuhan sektor energi</option><option>Lainnya</option></select></div>
+          <div class="field"><label for="location">Lokasi pengiriman</label><input id="location" name="location" placeholder="Kota atau lokasi proyek" /></div>
+          <div class="field"><label for="details">Barang, spesifikasi &amp; jumlah</label><textarea id="details" name="details" placeholder="Nama barang, merek (bila diperlukan), spesifikasi, jumlah, dan target pengiriman..." required></textarea></div>
+          <div class="submit-row"><button class="submit-btn" type="submit">Kirim inquiry via WhatsApp <span class="arrow">↗</span></button><span class="form-note">WhatsApp akan terbuka dengan detail inquiry yang sudah disusun. Anda hanya perlu memeriksa dan menekan Kirim.</span></div>
+          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div>
+          <a class="brand" href="#top"><span class="brand-main">EXORA</span><span class="brand-sub">NUSANTARA PERSADA</span></a>
+          <p class="footer-tagline">Menghubungkan kebutuhan pengadaan perusahaan dengan jaringan pemasok dan relasi Exora di berbagai wilayah Indonesia.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col"><span>Jelajahi</span><a href="#about">Tentang</a><a href="#services">Layanan</a><a href="#industries">Bidang Usaha</a><a href="#process">Alur Kerja</a></div>
+          <div class="footer-col"><span>Kontak</span><a href="#contact">Kirim Inquiry</a><a href="#top">Kembali ke atas ↑</a></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> EXORA NUSANTARA PERSADA</span><span>Jaringan pemasok &amp; sourcing industri</span></div>
+    </div>
+  </footer>
+
+  <script>
+    // Three-layer procedural liquid-chrome streams. Render only while the hero is visible.
+    (() => {
+      const canvas = document.getElementById('liquidCanvas');
+      if (!canvas) return;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const gl = canvas.getContext('webgl', {
+        alpha: true,
+        antialias: false,
+        depth: false,
+        stencil: false,
+        premultipliedAlpha: false,
+        powerPreference: 'low-power'
+      });
+      if (!gl) return; // The CSS fallback remains visible.
+
+      const vertexSource = `
+        attribute vec2 a_position;
+        varying vec2 v_uv;
+        void main() {
+          v_uv = a_position * 0.5 + 0.5;
+          gl_Position = vec4(a_position, 0.0, 1.0);
+        }
+      `;
+
+      const fragmentSource = `
+        precision mediump float;
+        varying vec2 v_uv;
+        uniform vec2 u_resolution;
+        uniform float u_time;
+
+        float centerLine(float x, float t, float phase) {
+          return 0.035
+            + 0.235 * sin(1.58 * x - 0.43 * t + phase)
+            + 0.082 * sin(2.92 * x + 0.31 * t + 0.48 + phase * 1.7)
+            + 0.022 * sin(4.08 * x - 0.23 * t + 1.1 + phase * 2.1);
+        }
+        float centerLineDx(float x, float t, float phase) {
+          return 0.235 * 1.58 * cos(1.58 * x - 0.43 * t + phase)
+               + 0.082 * 2.92 * cos(2.92 * x + 0.31 * t + 0.48 + phase * 1.7)
+               + 0.022 * 4.08 * cos(4.08 * x - 0.23 * t + 1.1 + phase * 2.1);
+        }
+        float ribbonWidth(float x, float t, float phase) {
+          return 0.205
+            + 0.026 * sin(1.22 * x - 0.36 * t + 0.7 + phase)
+            + 0.010 * sin(2.35 * x + 0.27 * t + phase * 1.3);
+        }
+        float ribbonWidthDx(float x, float t, float phase) {
+          return 0.026 * 1.22 * cos(1.22 * x - 0.36 * t + 0.7 + phase)
+               + 0.010 * 2.35 * cos(2.35 * x + 0.27 * t + phase * 1.3);
+        }
+        float softBand(float x, float center, float width) {
+          float d = (x - center) / width;
+          return exp(-d * d);
+        }
+
+        vec4 shadeRibbon(vec2 p, float t, float yOffset, float phase, float widthScale) {
+          p.y -= yOffset;
+          float center = centerLine(p.x, t, phase);
+          float width = ribbonWidth(p.x, t, phase) * widthScale;
+          float signedQ = (p.y - center) / width;
+          float q = abs(signedQ);
+          float sideFade = 1.0 - smoothstep(0.88, 1.025, q);
+          float halfWidth = (u_resolution.x / u_resolution.y) * 1.225;
+          float endFade = smoothstep(-halfWidth * 0.98, -halfWidth * 0.72, p.x)
+                        * (1.0 - smoothstep(halfWidth * 0.72, halfWidth * 0.98, p.x));
+          float alpha = sideFade * endFade;
+
+          // Smooth analytic surface gradients; no mesh facets or sampled displacement seams.
+          float body = max(0.035, 1.0 - signedQ * signedQ);
+          float heightSlope = -0.335 * 1.24 * signedQ * pow(body, -0.38);
+          if (q > 1.0) heightSlope = 0.0;
+          float centerDx = centerLineDx(p.x, t, phase);
+          float widthDx = ribbonWidthDx(p.x, t, phase) * widthScale;
+          float qDx = -centerDx / width - signedQ * widthDx / width;
+          float slopeX = heightSlope * qDx;
+          float slopeY = heightSlope / width;
+          vec3 normal = normalize(vec3(-centerDx * 0.52 - slopeX * 1.22, -slopeY * 1.22, 1.0));
+
+          vec3 incident = normalize(vec3(0.0, 0.0, -1.0));
+          vec3 reflected = reflect(incident, normal);
+          float envX = clamp(reflected.x * 0.5 + 0.5, 0.0, 1.0);
+          float envY = clamp(reflected.y * 0.5 + 0.5, 0.0, 1.0);
+          float brightA = softBand(envX, 0.16, 0.115);
+          float brightB = softBand(envX, 0.53, 0.19);
+          float brightC = softBand(envX, 0.86, 0.105);
+          float darkBand = softBand(envX, 0.365, 0.085) * 0.48
+                         + softBand(envX, 0.715, 0.075) * 0.27;
+          float tone = 0.17 + 0.76 * brightA + 0.55 * brightB + 0.82 * brightC - darkBand;
+          tone *= 0.91 + 0.09 * cos((envY - 0.5) * 3.14159);
+          tone = clamp(tone, 0.055, 1.0);
+          vec3 color = vec3(tone * 0.91, tone * 0.95, tone);
+          float keyLight = pow(max(dot(normal, normalize(vec3(-0.42, 0.52, 0.74))), 0.0), 28.0);
+          float rimLight = pow(1.0 - clamp(normal.z, 0.0, 1.0), 2.25);
+          float travelingLight = softBand(p.x, 0.55 * sin(t * 0.29 + phase) + 0.25, 0.42);
+          color += vec3(0.82, 0.88, 0.94) * keyLight * 0.34;
+          color += vec3(0.20, 0.23, 0.27) * rimLight * 0.72;
+          color += vec3(0.14, 0.16, 0.18) * travelingLight * 0.42;
+          float softRim = softBand(q, 0.83, 0.085);
+          color = mix(color, vec3(0.93, 0.96, 0.99), softRim * 0.16);
+          color *= 0.94 + 0.06 * (1.0 - smoothstep(0.24, 1.02, q));
+          return vec4(color, alpha * 0.96);
+        }
+
+        void main() {
+          vec2 p = (v_uv - 0.5) * vec2(u_resolution.x / u_resolution.y, 1.0) * 2.45;
+          float t = u_time;
+          // Three independently phased chrome streams create depth without a single flat band.
+          vec4 back = shadeRibbon(p, t * 0.88, -0.43, 2.05, 0.78);
+          vec4 mid  = shadeRibbon(p, t * 1.08,  0.00, 0.25, 0.94);
+          vec4 front= shadeRibbon(p, t * 1.22,  0.43, 4.10, 0.82);
+          vec3 color = back.rgb * back.a;
+          float alpha = back.a;
+          color = mid.rgb * mid.a + color * (1.0 - mid.a);
+          alpha = mid.a + alpha * (1.0 - mid.a);
+          color = front.rgb * front.a + color * (1.0 - front.a);
+          alpha = front.a + alpha * (1.0 - front.a);
+          gl_FragColor = vec4(color, alpha);
+        }
+      `;
+
+      function compileShader(type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.warn('Exora liquid shader:', gl.getShaderInfoLog(shader));
+          gl.deleteShader(shader);
+          return null;
+        }
+        return shader;
+      }
+
+      const vertexShader = compileShader(gl.VERTEX_SHADER, vertexSource);
+      const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentSource);
+      if (!vertexShader || !fragmentShader) return;
+
+      const program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+        console.warn('Exora liquid program:', gl.getProgramInfoLog(program));
+        return;
+      }
+      gl.useProgram(program);
+      canvas.closest('.hero-art')?.classList.add('webgl-ready');
+
+      const buffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+        -1, -1, 1, -1, -1, 1,
+        -1, 1, 1, -1, 1, 1
+      ]), gl.STATIC_DRAW);
+      const position = gl.getAttribLocation(program, 'a_position');
+      gl.enableVertexAttribArray(position);
+      gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
+
+      const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+      const timeLocation = gl.getUniformLocation(program, 'u_time');
+      let visible = true;
+      let pageActive = !document.hidden;
+      let frameId = 0;
+      let startTime = performance.now();
+      let lastFrame = 0;
+
+      function resize() {
+        const rect = canvas.getBoundingClientRect();
+        const quality = window.innerWidth <= 640 ? 1.25 : 1.35;
+        const scale = Math.min(window.devicePixelRatio || 1, quality);
+        const width = Math.max(1, Math.round(rect.width * scale));
+        const height = Math.max(1, Math.round(rect.height * scale));
+        if (canvas.width !== width || canvas.height !== height) {
+          canvas.width = width;
+          canvas.height = height;
+          gl.viewport(0, 0, width, height);
+          gl.uniform2f(resolutionLocation, width, height);
+        }
+      }
+
+      function draw(now) {
+        frameId = 0;
+        if (!visible || !pageActive) return;
+        if (!reducedMotion && now - lastFrame < 15) {
+          frameId = requestAnimationFrame(draw);
+          return;
+        }
+        lastFrame = now;
+        gl.clearColor(0, 0, 0, 0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.uniform1f(timeLocation, reducedMotion ? 0 : (now - startTime) * 0.00048);
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        if (!reducedMotion) frameId = requestAnimationFrame(draw);
+      }
+
+      function updateLoop() {
+        if (visible && pageActive && !frameId && !reducedMotion) frameId = requestAnimationFrame(draw);
+        if (reducedMotion && visible && pageActive && !frameId) {
+          frameId = requestAnimationFrame(draw);
+        }
+      }
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          visible = entries.some(entry => entry.isIntersecting);
+          if (visible) updateLoop();
+          else if (frameId) { cancelAnimationFrame(frameId); frameId = 0; }
+        }, { threshold: 0.01 });
+        observer.observe(canvas);
+      }
+      document.addEventListener('visibilitychange', () => {
+        pageActive = !document.hidden;
+        if (pageActive) updateLoop();
+        else if (frameId) { cancelAnimationFrame(frameId); frameId = 0; }
+      });
+      window.addEventListener('resize', () => { resize(); if (reducedMotion) updateLoop(); }, { passive: true });
+      resize();
+      updateLoop();
+    })();
+
+    // Mobile navigation
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Tutup navigasi' : 'Buka navigasi');
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Buka navigasi');
+      menuToggle.textContent = '☰';
+    }));
+
+    // Reveal sections as they enter the viewport; keep content visible without IntersectionObserver.
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach(item => observer.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add('visible'));
+    }
+
+    // Prepare a well-formatted inquiry and open WhatsApp with the message prefilled.
+    const rfqForm = document.getElementById('rfqForm');
+    const formStatus = document.getElementById('formStatus');
+    rfqForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!rfqForm.reportValidity()) return;
+      const data = new FormData(rfqForm);
+      const message = [
+        'Halo Exora, saya ingin menyampaikan inquiry pengadaan.',
+        '',
+        '*DATA PEMOHON*',
+        `Nama / Perusahaan: ${data.get('name')}`,
+        `Email / No. HP: ${data.get('email')}`,
+        '',
+        '*DETAIL KEBUTUHAN*',
+        `Kategori: ${data.get('category')}`,
+        `Lokasi pengiriman: ${data.get('location') || 'Belum dicantumkan'}`,
+        '',
+        '*Barang, spesifikasi, dan jumlah:*',
+        data.get('details').trim(),
+        '',
+        'Mohon dibantu pengecekan opsi pemasok dan penawarannya.',
+        'Terima kasih.'
+      ].join('\n');
+      const whatsappNumber = '62882015662085';
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+      formStatus.textContent = 'Membuka WhatsApp dengan pesan inquiry yang sudah disiapkan…';
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    // V7 motion orchestration: scroll work is throttled to one frame and offscreen items are unobserved.
+    (() => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const header = document.querySelector('.site-header');
+      const progress = document.getElementById('scrollProgress');
+      const hero = document.querySelector('.hero');
+      let scrollQueued = false;
+      let pointerQueued = false;
+      let pointerX = 72;
+      let pointerY = 48;
+
+      const updateScroll = () => {
+        const y = window.scrollY || document.documentElement.scrollTop;
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        if (header) header.classList.toggle('is-scrolled', y > 24);
+        if (progress) progress.style.transform = `scaleX(${max > 0 ? Math.min(1, Math.max(0, y / max)) : 0})`;
+        scrollQueued = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (!scrollQueued) {
+          scrollQueued = true;
+          requestAnimationFrame(updateScroll);
+        }
+      }, { passive: true });
+      window.addEventListener('resize', updateScroll, { passive: true });
+      updateScroll();
+
+      if (hero && !reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        hero.addEventListener('pointermove', event => {
+          const rect = hero.getBoundingClientRect();
+          pointerX = ((event.clientX - rect.left) / rect.width) * 100;
+          pointerY = ((event.clientY - rect.top) / rect.height) * 100;
+          if (!pointerQueued) {
+            pointerQueued = true;
+            requestAnimationFrame(() => {
+              hero.style.setProperty('--pointer-x', `${pointerX.toFixed(1)}%`);
+              hero.style.setProperty('--pointer-y', `${pointerY.toFixed(1)}%`);
+              pointerQueued = false;
+            });
+          }
+        }, { passive: true });
+        hero.addEventListener('pointerleave', () => {
+          hero.style.setProperty('--pointer-x', '72%');
+          hero.style.setProperty('--pointer-y', '48%');
+        }, { passive: true });
+      }
+
+      const motionTargets = document.querySelectorAll(
+        '.service-card, .industry-row, .process-step, .contact-form .field, .footer-col, .about-bottom, .hero-index'
+      );
+      motionTargets.forEach((item, index) => {
+        item.classList.add('motion-item');
+        const siblings = item.parentElement ? Array.from(item.parentElement.children).filter(el => el.matches('.motion-item')) : [];
+        const order = Math.max(0, siblings.indexOf(item));
+        item.style.setProperty('--motion-delay', `${Math.min(order * 85, 340)}ms`);
+      });
+
+      if (!reduceMotion && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -35px 0px' });
+        motionTargets.forEach(item => observer.observe(item));
+      } else {
+        motionTargets.forEach(item => item.classList.add('is-in'));
+      }
+
+      const menuToggle = document.getElementById('menuToggle');
+      if (menuToggle && header) {
+        menuToggle.addEventListener('click', () => {
+          requestAnimationFrame(() => header.classList.toggle('menu-open', menuToggle.getAttribute('aria-expanded') === 'true'));
+        });
+        document.querySelectorAll('#navLinks a').forEach(link => link.addEventListener('click', () => {
+          header.classList.remove('menu-open');
+        }));
+      }
+    })();
+  </script>
+
+</body>
+</html>
